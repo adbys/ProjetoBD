@@ -42,12 +42,12 @@ CREATE TABLE Estacao_de_qualidade( idEstacaoQualidade char(10),
 
 CREATE TABLE Posto_pluviometrico( idPostoPluviometrico char(10),
 		                   nome VARCHAR(30),
-				   idBacia char(10), //Gerando relacionamento bacia monitorada por posto pluviometrico
+				   idBacia char(10), 
 		                   PRIMARY KEY (idPostoPluviometrico),
 				   FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia)
 		                 );
 
-CREATE TALBE Endereco_posto_pluviometrico( rua VARCHAR(50),
+CREATE TABLE Endereco_posto_pluviometrico( rua VARCHAR(50),
 				   	   num INTEGER,
 				   	   bairro VARCHAR(50),
 				   	   municipio VARCHAR(50),
@@ -131,7 +131,7 @@ CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
 					       PRIMARY KEY(data ph dbo turbidez oxigenio alcalinidade idEstacaoQualidade idRio)
 					     );
 
-CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
+CREATE TABLE Medicao_estacao_de_qualidade_acude( data DATE,
 					       ph DECIMAL,
 					       dbo DECIMAL,
 					       turbidez DECIMAL,
@@ -141,5 +141,5 @@ CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
 					       idAcude char(10),
 					       FOREIGN KEY(idEstacaoQualidade) REFERENCES Estacao_de_qualidade(idEstacaoQualidade),
 			       		       FOREIGN KEY(idAcude) REFERENCES Acude(idAcude),
-					       PRIMARY KEY(data ph dbo turbidez oxigenio alcalinidade idEstacaoQualidade idAcude)
+					       PRIMARY KEY(data idEstacaoQualidade idAcude)
 					     );
