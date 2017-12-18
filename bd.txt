@@ -3,7 +3,7 @@ CREATE TABLE Bacia( idBacia char(10),
 		    area DECIMAL,
 		    perimetro DECIMAL,
 		    PRIMARY KEY (idBacia)
-		  )
+		  );
 
 CREATE TABLE Rio( idRio char(10),
 		  nome VARCHAR(30),
@@ -11,7 +11,7 @@ CREATE TABLE Rio( idRio char(10),
 	          idBacia char(10), 
 		  PRIMARY KEY (idRio),
 		  FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia)
-		)
+		);
 
 CREATE TABLE Acude( idAcude char(10),
 		    nome VARCHAR(30),
@@ -21,13 +21,13 @@ CREATE TABLE Acude( idAcude char(10),
 		    idRio char(10),
 		    PRIMARY KEY (idAcude),
 		    FOREIGN KEY (idRio) REFERENCES Rio(idRio)
-		  )
+		  );
 
 
 CREATE TABLE Usuario( matricula char(10),
 		      nome VARCHAR(30),
 		      PRIMARY KEY (matricula)
-		  )
+		  );
 
 CREATE TABLE Estacao_de_qualidade( idEstacaoQualidade char(10),
 		                   nome VARCHAR(30),
@@ -38,14 +38,14 @@ CREATE TABLE Estacao_de_qualidade( idEstacaoQualidade char(10),
 		                   PRIMARY KEY (idEstacaoQualidade),
 				   FOREIGN KEY idRio REFERENCES Rio(idRio),
 				   FOREIGN KEY idAcude REFERENCES Acude(idAcude)
-		                 )
+		                 );
 
 CREATE TABLE Posto_pluviometrico( idPostoPluviometrico char(10),
 		                   nome VARCHAR(30),
 				   idBacia char(10), //Gerando relacionamento bacia monitorada por posto pluviometrico
 		                   PRIMARY KEY (idPostoPluviometrico),
 				   FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia)
-		                 )
+		                 );
 
 CREATE TALBE Endereco_posto_pluviometrico( rua VARCHAR(50),
 				   	   num INTEGER,
@@ -55,7 +55,7 @@ CREATE TALBE Endereco_posto_pluviometrico( rua VARCHAR(50),
 					   idPostoPluviometrico char(10),
 		                           PRIMARY KEY (idPostoPluviometrico rua num bairro municipio estado),
 					   FOREIGN KEY (idPostoPluviometrico) REFERENCES Posto_pluviometrico(idPostoPluviometrico)
-					 )
+					 );
 
 
 
@@ -64,7 +64,7 @@ CREATE TABLE Telefones_usuario( ddd CHAR(2),
 			       matricula char(10) NOT NULL,
 			       FOREIGN KEY(matricula) REFERENCES Usuario(matricula),
 			       PRIMARY KEY(matricula numero ddd)
-			     )
+			     );
 
 CREATE TABLE Medicao_estacao_qualidade_rio( data DATE,
 			                    ph DECIMAL,
@@ -74,14 +74,14 @@ CREATE TABLE Medicao_estacao_qualidade_rio( data DATE,
 					    alcalinidade DECIMAL,
 			                    FOREIGN KEY(matricula) REFERENCES Usuario(matricula),
 			                    PRIMARY KEY(matricula numero ddd)
-			                  )
+			                  );
 
 CREATE TABLE Contribuicao_posto_pluviometrico_acude( idPostoPluviometrico char(10),
 						     idAcude char(10),
 						     FOREIGN KEY(idPostoPluviometrico) REFERENCES Posto_pluviometrico(idPostoPluviometrico),
 						     FOREIGN KEY(idAcude) REFERENCES Acude(idAcude),
 						     PRIMARY KEY (idPostoPluviometrico idAcude)
-						   )
+						   );
 
 CREATE TABLE Cota_area_volume( id char(10),
 			       cota DECIMAL,
@@ -90,7 +90,7 @@ CREATE TABLE Cota_area_volume( id char(10),
 			       idAcude char(10),
 			       PRIMARY KEY (id),
 			       FOREIGN KEY (idAcude) REFERENCES Acude(idAcude)
-			     )
+			     );
 
 
 CREATE TABLE Medicao_cota_diaria( idMedicaoDiaria char(10),
@@ -101,7 +101,7 @@ CREATE TABLE Medicao_cota_diaria( idMedicaoDiaria char(10),
 				  FOREIGN KEY matricula REFERENCES Usuario(matricula),
 				  FOREIGN KEY idAcude REFERENCES Acude(idAcude),
 				  PRIMARY KEY(idMedicaoDiaria)
-				)
+				);
 
 CREATE TABLE Medicao_pluviometrica( idMedicao char(10),
 				    idPostoPluviometrico char(10),
@@ -109,14 +109,14 @@ CREATE TABLE Medicao_pluviometrica( idMedicao char(10),
 				    FOREIGN KEY matricula REFERENCES Usuario(matricula),
 				    FOREIGN KEY idPostoPluviometrico REFERENCES Posto_pluviometrico(idPostoPluviometrico),
 				    PRIMARY KEY(idMedicao)
-				  )
+				  );
 
 CREATE TABLE Valores_diarios_medicao_pluviometrica( valorChuva DECIMAL,
 						    data DATE,
 			       			    idMedicao char(10),
 			       			    FOREIGN KEY(idMedicao) REFERENCES Medicao_pluviometrica(idMedicao),
 			       			    PRIMARY KEY(valorChuva data idMedicao)
-			     			  )
+			     			  );
 
 CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
 					       ph DECIMAL,
@@ -129,7 +129,7 @@ CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
 					       FOREIGN KEY(idEstacaoQualidade) REFERENCES Estacao_de_qualidade(idEstacaoQualidade),
 			       		       FOREIGN KEY(idRio) REFERENCES Rio(idRio),
 					       PRIMARY KEY(data ph dbo turbidez oxigenio alcalinidade idEstacaoQualidade idRio)
-					     )
+					     );
 
 CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
 					       ph DECIMAL,
@@ -142,4 +142,4 @@ CREATE TABLE Medicao_estacao_de_qualidade_rio( data DATE,
 					       FOREIGN KEY(idEstacaoQualidade) REFERENCES Estacao_de_qualidade(idEstacaoQualidade),
 			       		       FOREIGN KEY(idAcude) REFERENCES Acude(idAcude),
 					       PRIMARY KEY(data ph dbo turbidez oxigenio alcalinidade idEstacaoQualidade idAcude)
-					     )
+					     );
