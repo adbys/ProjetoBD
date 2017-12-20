@@ -1,9 +1,9 @@
 CREATE TABLE Bacia( idBacia INTEGER,
-		    nome VARCHAR(30),
-		    area DECIMAL,
-		    perimetro DECIMAL,
-		    PRIMARY KEY (idBacia)
-		  );
+		    		nome VARCHAR(30),
+		    		area DECIMAL,
+		    		perimetro DECIMAL,
+		    		PRIMARY KEY (idBacia)
+		  		  );
 
 CREATE TABLE Rio( idRio INTEGER,
 				  nome VARCHAR(30),
@@ -11,7 +11,7 @@ CREATE TABLE Rio( idRio INTEGER,
 			      idBacia INTEGER, --GERANDO RELACIONAMENTO BACIA 1:N RIO
 				  PRIMARY KEY (idRio),
 				  FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia)
-		);
+				);
 
 CREATE TABLE Acude( idAcude INTEGER,
 				    nome VARCHAR(30),
@@ -45,7 +45,7 @@ CREATE TABLE Estacao_de_qualidade( idEstacaoQualidade INTEGER,
 								   FOREIGN KEY (idRio) REFERENCES Rio(idRio),
 								   FOREIGN KEY (idAcude) REFERENCES Acude(idAcude),
 								   CHECK ((idRio IS NOT NULL) OR (idAcude IS NOT NULL))
-		                 );
+		                 		 );
 
 CREATE TABLE Posto_pluviometrico( idPostoPluviometrico INTEGER,
 						          nome VARCHAR(30),
@@ -57,7 +57,7 @@ CREATE TABLE Posto_pluviometrico( idPostoPluviometrico INTEGER,
 								  idBacia INTEGER, --Gerando relacionamento bacia monitorada 1:N por posto pluviometrico
 						          PRIMARY KEY (idPostoPluviometrico),
 								  FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia)
-		                 );
+		                		);
 
 
 CREATE TABLE Telefones_usuario( ddd CHAR(2),
@@ -68,11 +68,11 @@ CREATE TABLE Telefones_usuario( ddd CHAR(2),
 			 				  );
 
 CREATE TABLE Contrib_p_pluviometrico_acude( idPostoPluviometrico INTEGER, -- GERANDO RELACIONAMENTO AÇUDE N:N POSTO PLUVIOMETRICO
-												     idAcude INTEGER,
-												     PRIMARY KEY (idPostoPluviometrico, idAcude),
-												     FOREIGN KEY(idPostoPluviometrico) REFERENCES Posto_pluviometrico(idPostoPluviometrico),
-												     FOREIGN KEY(idAcude) REFERENCES Acude(idAcude)
-						   							);
+											idAcude INTEGER,
+											PRIMARY KEY (idPostoPluviometrico, idAcude),
+											FOREIGN KEY(idPostoPluviometrico) REFERENCES Posto_pluviometrico(idPostoPluviometrico),
+											FOREIGN KEY(idAcude) REFERENCES Acude(idAcude)
+						   				  );
 
 CREATE TABLE Cota_area_volume( id INTEGER,
 						       cota DECIMAL,
@@ -103,8 +103,8 @@ CREATE TABLE Medicao_pluviometrica( idMedicao INTEGER,
 								  );
 
 CREATE TABLE V_diarios_med_pluviometrica( valorChuva DECIMAL,
-												    data DATE,
-									       			idMedicao INTEGER,
-									       			PRIMARY KEY(valorChuva, data, idMedicao),
-									       			FOREIGN KEY(idMedicao) REFERENCES Medicao_pluviometrica(idMedicao)
-			     			  					  );
+										  data DATE,
+									      idMedicao INTEGER,
+									      PRIMARY KEY(valorChuva, data, idMedicao),
+									      FOREIGN KEY(idMedicao) REFERENCES Medicao_pluviometrica(idMedicao)
+			     			  			);
