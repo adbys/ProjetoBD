@@ -67,7 +67,7 @@ CREATE TABLE Telefones_usuario( ddd CHAR(2),
 							    FOREIGN KEY(matricula) REFERENCES Usuario(matricula)
 			 				  );
 
-CREATE TABLE Contribuicao_posto_pluviometrico_acude( idPostoPluviometrico INTEGER, -- GERANDO RELACIONAMENTO AÇUDE N:N POSTO PLUVIOMETRICO
+CREATE TABLE Contrib_p_pluviometrico_acude( idPostoPluviometrico INTEGER, -- GERANDO RELACIONAMENTO AÇUDE N:N POSTO PLUVIOMETRICO
 												     idAcude INTEGER,
 												     PRIMARY KEY (idPostoPluviometrico, idAcude),
 												     FOREIGN KEY(idPostoPluviometrico) REFERENCES Posto_pluviometrico(idPostoPluviometrico),
@@ -102,7 +102,7 @@ CREATE TABLE Medicao_pluviometrica( idMedicao INTEGER,
 								    FOREIGN KEY (idPostoPluviometrico) REFERENCES Posto_pluviometrico(idPostoPluviometrico)
 								  );
 
-CREATE TABLE Valores_diarios_medicao_pluviometrica( valorChuva DECIMAL,
+CREATE TABLE V_diarios_med_pluviometrica( valorChuva DECIMAL,
 												    data DATE,
 									       			idMedicao INTEGER,
 									       			PRIMARY KEY(valorChuva, data, idMedicao),
