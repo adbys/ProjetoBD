@@ -48,7 +48,7 @@ CREATE TABLE Estacao_de_qualidade( idEstacaoQualidade INTEGER,
 							       turbidez DECIMAL,
 							       oxigenio DECIMAL,
 							       alcalinidade DECIMAL,
-		                   		   PRIMARY KEY (idEstacaoQualidade, data),
+		                   		   PRIMARY KEY (idEstacaoQualidade, idRio, idAcude, data),
 								   FOREIGN KEY (idRio) REFERENCES Rio(idRio),
 								   FOREIGN KEY (idAcude) REFERENCES Acude(idAcude),
 								   CHECK ((idRio IS NOT NULL) OR (idAcude IS NOT NULL))
