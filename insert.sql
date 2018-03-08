@@ -75,7 +75,7 @@ INSERT INTO Estacao_de_qualidade(idEstacaoQualidade, nome, latitude, longitude, 
 
 INSERT INTO Estacao_de_qualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude, data, ph, dbo, turbidez, oxigenio, alcalinidade) VALUES ('7', 'Estacao Gramame', '180', '199', '5', '4', '03/02/2018', '5', '7', '12', '19', '9');
 
-INSERT INTO Estacao_de_qualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude, data, ph, dbo, turbidez, oxigenio, alcalinidade) VALUES ('8', 'Estacao Amazonas', '500', '600', '9', '6', '03/10/2017', '5', '7', '12', '19', '9');
+INSERT INTO Estacao_de_qualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude, data, ph, dbo, turbidez, oxigenio, alcalinidade) VALUES ('8', 'Estacao Amazonas', '500', '600', '9', '6', '03/01/2017', '5', '7', '12', '19', '9');
 
 
 --============================COTA ACUDE=========================================

@@ -27,6 +27,20 @@ SELECT nome
 FROM Bacia
 ORDER BY area, perimetro DESC;
 
+-- ======================== 5 ===============================
+
+CREATE TRIGGER medicao_pluv_data
+BEFORE INSERT OR UPDATE ON V_diarios_med_pluviometrica
+FOR EACH ROW
+BEGIN
+	IF (:new.data > SYSDATE) THEN
+		RAISE_APPLICATION_ERROR(-20001, 'Data da medição pluviometrica não pode ser superior a data atual');
+	END IF;
+END;
+
+INSERT INTO V_diarios_med_pluviometrica(valorChuva, data, idMedicao) VALUES ('100', '05/08/2019', '2');
+
+
 -- ======================== 6 ===============================
 
 SELECT dbo
@@ -73,29 +87,16 @@ GROUP BY v.idMedicao
 
 -- ======================== 11 ===============================
 
-CREATE TRIGGER cota_area_non_zerov
-AFTER INSERT ON Cota_area_volume
-REFERENCING NEW AS NovaCota
-FOR EACH ROW
-BEGIN
-   DECLARE ERRO_COTA_AREA_VOLUME EXCEPTION
-   FOR SQLSTATE '99999';
-   IF NovaCota.area = '0' THEN SIGNAL ERRO_COTA_AREA_VOLUME;
-   END IF;
-END;
-
-INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('1', '100000', '0', '10000', '1');
-
-
-
 CREATE OR REPLACE TRIGGER cota_area_non_zerov
 AFTER INSERT ON Cota_area_volume
 FOR EACH ROW
 BEGIN
-   IF (new.area = 0) THEN
+   IF (:new.area = 0) THEN
        RAISE_APPLICATION_ERROR(-20001, 'Area cota não pode possuir valor zero');
    END IF;
 END;
+
+INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('1', '100000', '0', '10000', '1');
 
 -- ======================== 12 ===============================
 
@@ -126,22 +127,3 @@ WHERE idRio IN (SELECT idRio
 
 
 
-
-
-
-
-
-
-
-
-
-
-CREATE VIEW acudes_pernambuco AS
-SELECT a.nome, eq.ph
-FROM Estacao_de_qualidade eq, Acude a
-WHERE a.idAcude IN (
-    SELECT idAcude
-    FROM Acude a, Rio r
-    WHERE r.indicativo = 'Pernambuco' and a.idRio = r.idRio
-
-);
