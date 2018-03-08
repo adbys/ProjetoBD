@@ -11,9 +11,10 @@ CREATE OR REPLACE VIEW chuva_no_paraiba AS
 SELECT EXTRACT(MONTH FROM data) AS MES, EXTRACT(YEAR FROM data) AS ANO, SUM(valorChuva) AS CHUVAS
 FROM  V_diarios_med_pluviometrica v, Posto_pluviometrico p, Medicao_pluviometrica m, Rio r, Bacia b
 WHERE r.nome = 'Rio Gramame' and r.idBacia = b.idBacia and p.idBacia = b.idBacia and m.idPostoPluviometrico = p.idPostoPluviometrico and v.idMedicao = m.idMedicao
-GROUP BY v.idMedicao, EXTRACT(MONTH FROM data), EXTRACT(YEAR FROM data)
+GROUP BY v.idMedicao, EXTRACT(MONTH FROM data), EXTRACT(YEAR FROM data);
 
 -- ======================== 3 ===============================
+
 SELECT nome
 FROM Rio
 WHERE idRio NOT IN (
@@ -29,7 +30,7 @@ ORDER BY area, perimetro DESC;
 
 -- ======================== 5 ===============================
 
-CREATE TRIGGER medicao_pluv_data
+CREATE OR REPLACE TRIGGER medicao_pluv_data
 BEFORE INSERT OR UPDATE ON V_diarios_med_pluviometrica
 FOR EACH ROW
 BEGIN
@@ -37,6 +38,7 @@ BEGIN
 		RAISE_APPLICATION_ERROR(-20001, 'Data da medição pluviometrica não pode ser superior a data atual');
 	END IF;
 END;
+/
 
 INSERT INTO V_diarios_med_pluviometrica(valorChuva, data, idMedicao) VALUES ('100', '05/08/2019', '2');
 
@@ -58,15 +60,15 @@ GROUP BY a.idRio, r.nome;
 
 -- ======================== 8 ===============================
 
-CREATE VIEW "ACUDES_PERNAMBUCO" ("NOME", "PH") AS 
-  SELECT a.nome, eq.ph
+CREATE OR REPLACE VIEW "ACUDES_PERNAMBUCO" ("NOME", "PH") AS 
+  SELECT DISTINCT(a.nome), eq.ph
 FROM Estacao_de_qualidade eq, Acude a
 WHERE a.idAcude IN (
     SELECT idAcude
     FROM Acude a, Rio r
     WHERE r.indicativo = 'Pernambuco' and a.idRio = r.idRio
 
-)
+);
 
 -- ======================== 9 ===============================
 
@@ -83,7 +85,7 @@ ORDER BY turbidez ASC;
 SELECT SUM(valorChuva)
 FROM V_diarios_med_pluviometrica v, Posto_pluviometrico p, Medicao_pluviometrica m, Rio r, Bacia b
 WHERE r.nome = 'Rio Gramame' and r.idBacia = b.idBacia and p.idBacia = b.idBacia and m.idPostoPluviometrico = p.idPostoPluviometrico and v.idMedicao = m.idMedicao and v.data BETWEEN '10/01/2017' AND '10/31/2017'
-GROUP BY v.idMedicao
+GROUP BY v.idMedicao;
 
 -- ======================== 11 ===============================
 
@@ -95,6 +97,7 @@ BEGIN
        RAISE_APPLICATION_ERROR(-20001, 'Area cota não pode possuir valor zero');
    END IF;
 END;
+/
 
 INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('1', '100000', '0', '10000', '1');
 
