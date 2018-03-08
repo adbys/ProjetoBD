@@ -109,7 +109,7 @@ FROM Acude a, Rio r
 WHERE r.indicativo = 'Paraíba' and a.idRio = r.idRio;
 
 -- ======================== 13 ===============================
-SELECT *
+SELECT nome
 FROM Bacia 
 WHERE perimetro >= ALL(SELECT perimetro FROM Bacia);
 
