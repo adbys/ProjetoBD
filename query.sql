@@ -1,9 +1,10 @@
--- ======================== 1 =============================== DUVIDA
+-- ======================== 1 =============================== 
 
 SELECT a.nome as acude, e.nome as estacao
 FROM Estacao_de_qualidade e, Acude a
 WHERE e.idAcude = a.idAcude
-GROUP BY a.nome, e.nome;
+GROUP BY a.nome, e.nome
+ORDER BY a.nome;
 
 -- ======================== 2 ===============================
 
