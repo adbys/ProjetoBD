@@ -12,7 +12,8 @@ CREATE OR REPLACE VIEW chuva_no_paraiba AS
 SELECT EXTRACT(MONTH FROM data) AS MES, EXTRACT(YEAR FROM data) AS ANO, SUM(valorChuva) AS CHUVAS
 FROM  V_diarios_med_pluviometrica v, Posto_pluviometrico p, Medicao_pluviometrica m, Rio r, Bacia b
 WHERE r.nome = 'Rio Gramame' and r.idBacia = b.idBacia and p.idBacia = b.idBacia and m.idPostoPluviometrico = p.idPostoPluviometrico and v.idMedicao = m.idMedicao
-GROUP BY v.idMedicao, EXTRACT(MONTH FROM data), EXTRACT(YEAR FROM data);
+GROUP BY v.idMedicao, EXTRACT(MONTH FROM data), EXTRACT(YEAR FROM data)
+ORDER BY EXTRACT(YEAR FROM data), EXTRACT(MONTH FROM data);
 
 -- ======================== 3 ===============================
 
