@@ -9,6 +9,7 @@ INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES ('3', 'Bacia do Rio Par
 
 INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES ('4', 'Bacia Atlântico Nordeste', '287300', '28730');
 
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES ('5', 'Bacia Tocantins-Araguaia', '500000', '50000');
 
 --============================RIOS=========================================
 
@@ -50,6 +51,12 @@ INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES 
 INSERT INTO Usuario(matricula, nome) VALUES ('1', 'José Maria');
 
 INSERT INTO Usuario(matricula, nome) VALUES ('2', 'João Silva');
+
+INSERT INTO Usuario(matricula, nome) VALUES ('3', 'Ana Maria');
+
+INSERT INTO Usuario(matricula, nome) VALUES ('4', 'José Cruz');
+
+INSERT INTO Usuario(matricula, nome) VALUES ('5', 'Pedro da Mata');
 
 --============================ESTACAO QUALIDADE=========================================
 
@@ -106,11 +113,37 @@ INSERT INTO Posto_pluviometrico(idPostoPluviometrico, nome, rua, num, bairro, mu
 
 INSERT INTO Posto_pluviometrico(idPostoPluviometrico, nome, rua, num, bairro, municipio, estado, idBacia) VALUES ('2', 'Posto Bacia do Amazonas', 'Rua do posto', '22', 'Bairro do posto', 'Amazonas', 'Amazonas', '1');
 
+INSERT INTO Posto_pluviometrico(idPostoPluviometrico, nome, rua, num, bairro, municipio, estado, idBacia) VALUES ('3', 'Posto B TocantinsAraguaia', 'Rua do posto', '330', 'Bairro do posto', 'Palmas', 'Tocantins', '5');
+
+INSERT INTO Posto_pluviometrico(idPostoPluviometrico, nome, rua, num, bairro, municipio, estado, idBacia) VALUES ('4', 'Posto Bacia do Paraguai', 'Rua do posto', '150', 'Bairro do posto', 'Assunção', 'La Recoleta', '3');
+
+INSERT INTO Posto_pluviometrico(idPostoPluviometrico, nome, rua, num, bairro, municipio, estado, idBacia) VALUES ('5', 'Posto Bacia do Paraná', 'Rua do posto', '405', 'Bairro do posto', 'Curitiba', 'Paraná', '2');
+
+
+--============================TELEFONES USUÁRIO=========================================
+
+INSERT INTO Telefones_usuario(ddd, numero, matricula) VALUES ('11', '11111111','1');
+
+INSERT INTO Telefones_usuario(ddd, numero, matricula) VALUES ('22', '22222222','2');
+
+INSERT INTO Telefones_usuario(ddd, numero, matricula) VALUES ('33', '33333333','3');
+
+INSERT INTO Telefones_usuario(ddd, numero, matricula) VALUES ('44', '44444444','4');
+
+INSERT INTO Telefones_usuario(ddd, numero, matricula) VALUES ('55', '55555555','5');
+
+
 --============================MEDICAO PLUVIOMETRICA=========================================
 
 INSERT INTO Medicao_pluviometrica(idMedicao, idPostoPluviometrico, matricula) VALUES ('1', '1', '1');
 
 INSERT INTO Medicao_pluviometrica(idMedicao, idPostoPluviometrico, matricula) VALUES ('2', '2', '1');
+
+INSERT INTO Medicao_pluviometrica(idMedicao, idPostoPluviometrico, matricula) VALUES ('3', '5', '2');
+
+INSERT INTO Medicao_pluviometrica(idMedicao, idPostoPluviometrico, matricula) VALUES ('4', '4', '3');
+
+INSERT INTO Medicao_pluviometrica(idMedicao, idPostoPluviometrico, matricula) VALUES ('5', '3', '4');
 
 --============================VALORES DIARIOS MEDICAO PLUVIOMETRICA=========================================
 
@@ -139,3 +172,29 @@ INSERT INTO V_diarios_med_pluviometrica(valorChuva, data, idMedicao) VALUES ('10
 INSERT INTO V_diarios_med_pluviometrica(valorChuva, data, idMedicao) VALUES ('200', '03/08/2018', '1');
 
 INSERT INTO V_diarios_med_pluviometrica(valorChuva, data, idMedicao) VALUES ('500', '03/08/2018', '2');
+
+
+--============================COTA AREA VOLUME=========================================
+
+INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('1', '100000', '100', '10000', '1');
+
+INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('2', '200000', '200', '20000', '2');
+
+INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('3', '300000', '300', '30000', '3');
+
+INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('4', '400000', '400', '40000', '4');
+
+INSERT INTO Cota_area_volume(id, cota, area, volume, idAcude) VALUES ('5', '500000', '500', '50000', '5');
+
+
+--============================CONTRIBUIÇÃO POSTO PLUVIOMETRICO ACUDES=========================================
+
+INSERT INTO Contrib_p_pluviometrico_acude(idPostoPluviometrico, idAcude) VALUES ('1', '1');
+
+INSERT INTO Contrib_p_pluviometrico_acude(idPostoPluviometrico, idAcude) VALUES ('2', '2');
+
+INSERT INTO Contrib_p_pluviometrico_acude(idPostoPluviometrico, idAcude) VALUES ('3', '3');
+
+INSERT INTO Contrib_p_pluviometrico_acude(idPostoPluviometrico, idAcude) VALUES ('4', '4');
+
+INSERT INTO Contrib_p_pluviometrico_acude(idPostoPluviometrico, idAcude) VALUES ('5', '5');
